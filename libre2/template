@@ -1,0 +1,19 @@
+# Template file for 'libre2'
+pkgname=libre2
+version="1.0"
+revision=1
+build_style=gnu-makefile
+short_desc="Fast, safe, thread-friendly C++ library for backtracking regular expression engines."
+maintainer="Yana A. Kireyonok <Yana.Kireyonok@linux.com>"
+license="BSD 3-clause New or Revised License"
+homepage="https://github.com/google/re2"
+
+makedepends="icu-libs"
+hostmakedepends="git"
+make_install_args="prefix=/usr"
+
+do_fetch() {
+        git clone https://github.com/google/re2.git $pkgname-$version
+}
+
+
