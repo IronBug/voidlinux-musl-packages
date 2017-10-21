@@ -1,0 +1,10 @@
+--- lib/libcitadel.h	2017-04-21 21:39:13.000000000 +0500
++++ lib/libcitadel.h	2017-10-09 01:54:44.000000000 +0500
+@@ -26,6 +26,7 @@
+ #include <stdarg.h>
+ #include <arpa/inet.h>
+ #include <sys/types.h>
++#include <fcntl.h> // for loff_t
+ #include <netinet/in.h>
+ 
+ #define LIBCITADEL_VERSION_NUMBER	904
