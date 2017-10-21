@@ -1,0 +1,34 @@
+--- src/sv_util/md5.c	2017-10-21 18:39:05.620325752 +0500
++++ src/sv_util/md5.c	2017-10-21 19:04:52.541240187 +0500
+@@ -221,7 +221,7 @@
+ 	gdm_md5_transform(ctx->buf, (uint32 *) ctx->in);
+ 	byteReverse((unsigned char *) ctx->buf, 4);
+ 	memcpy(digest, ctx->buf, 16);
+-	memset(ctx, 0, sizeof(ctx));	/* In case it's sensitive */
++	memset(ctx, 0, sizeof(*ctx));	/* In case it's sensitive */
+ }
+ 
+ 
+--- src/sv_regex/regcomp.c   2017-10-21 18:39:05.615325752 +0500
++++ src/sv_regex/regcomp.c      2017-10-21 19:16:59.002200004 +0500
+@@ -1397,8 +1397,6 @@
+      Since they must inherit the constraints.  */
+   if (constraint && !dfa->nodes[dfa->edests[node].elems[0]].duplicated)
+     {
+-      int org_node, cur_node;
+-      org_node = cur_node = node;
+       err = duplicate_node_closure (dfa, node, node, node, constraint);
+       if (BE (err != REG_NOERROR, 0))
+        return err;
+
+--- src/sv_regex/regexec.c   2017-10-21 18:39:05.618325752 +0500
++++ src/sv_regex/regexec.c      2017-10-21 19:22:19.320182286 +0500
+@@ -1926,6 +1926,7 @@
+                  || check_dst_limits (dfa, &sctx->limits, mctx, node,
+                                       str_idx, dst_node, to_idx))
+                continue;
++            else
+                {
+                  re_dfastate_t *cur_state;
+                  entry->flag = 0;
+

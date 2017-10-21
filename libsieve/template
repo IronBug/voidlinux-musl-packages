@@ -1,0 +1,24 @@
+# Template file for 'libsieve'
+pkgname=libsieve
+version="2.3"
+revision=1
+build_style=gnu-configure
+
+short_desc="Implementation of the Sieve mail filtering language."
+maintainer="Yana A. Kireyonok <Yana.Kireyonok@linux.com>"
+license="CMU"
+homepage="http://sodabrew.github.com/libsieve/"
+hostmakedepends=" git automake libtool bison flex "
+#make_install_args="prefix=/usr"
+
+do_fetch() {
+        git clone https://github.com/sodabrew/libsieve.git $pkgname-$version
+}
+
+pre_configure() {
+	autoreconf -fi
+}
+
+
+
+
