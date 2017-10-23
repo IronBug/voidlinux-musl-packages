@@ -1,0 +1,185 @@
+--- lib/b64/cdecode.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/b64/cdecode.c	2017-10-22 07:28:30.645772221 +0500
+@@ -5,7 +5,7 @@
+ For details, see http://sourceforge.net/projects/libb64
+ */
+ 
+-#include "b64/cdecode.h"
++#include "cdecode.h"
+ 
+ int base64_decode_value(char value_in)
+ {
+--- lib/b64/cencode.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/b64/cencode.c	2017-10-22 07:28:17.546772945 +0500
+@@ -10,7 +10,7 @@
+ // 
+ // 
+ 
+-#include "b64/cencode.h"
++#include "cencode.h"
+ 
+ void base64_init_encodestate(base64_encodestate* state_in)
+ {
+--- lib/json.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/json.c	2017-10-22 04:13:30.089419415 +0500
+@@ -21,7 +21,8 @@
+ 
+ /*@{*/
+ 
+-#include "sysdep.h"
++//#include "sysdep.h"
++#include <sys/syscall.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+--- lib/libcitadel.h	2017-04-21 21:39:13.000000000 +0500
++++ lib/libcitadel.h	2017-10-22 03:28:23.189569142 +0500
+@@ -27,6 +27,7 @@
+ #include <arpa/inet.h>
+ #include <sys/types.h>
+ #include <netinet/in.h>
++#include <fcntl.h> // for loff_t
+ 
+ #define LIBCITADEL_VERSION_NUMBER	904
+ 
+--- lib/lookup3.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/lookup3.c	2017-10-22 07:40:03.975733870 +0500
+@@ -170,7 +170,7 @@
+  hashlittle() has to dance around fitting the key bytes into registers.
+ --------------------------------------------------------------------
+ */
+-#if 0 // libcitadel doesn't use this.
++//#if 0 // libcitadel doesn't use this.
+ uint32_t hashword(
+ const uint32_t *k,                   /* the key, an array of uint32_t values */
+ size_t          length,               /* the length of the key, in uint32_ts */
+@@ -205,7 +205,7 @@
+   /*------------------------------------------------------ report the result */
+   return c;
+ }
+-#endif 
++//#endif 
+ 
+ /*
+ --------------------------------------------------------------------
+@@ -215,7 +215,7 @@
+ (*pc) will be the same as the return value from hashword().
+ --------------------------------------------------------------------
+ */
+-#if 0 // libcitadel doesn't use this.
++//#if 0 // libcitadel doesn't use this.
+ void hashword2 (
+ const uint32_t *k,                   /* the key, an array of uint32_t values */
+ size_t          length,               /* the length of the key, in uint32_ts */
+@@ -252,7 +252,7 @@
+   /*------------------------------------------------------ report the result */
+   *pc=c; *pb=b;
+ }
+-#endif
++//#endif
+ 
+ /*
+ -------------------------------------------------------------------------------
+@@ -462,7 +462,7 @@
+  * the key.  *pc is better mixed than *pb, so use *pc first.  If you want
+  * a 64-bit value do something like "*pc + (((uint64_t)*pb)<<32)".
+  */
+-#if 0 // libcitadel doesn't use this.
++//#if 0 // libcitadel doesn't use this.
+ void hashlittle2( 
+   const void *key,       /* the key to hash */
+   size_t      length,    /* length of the key */
+@@ -638,7 +638,7 @@
+   final(a,b,c);
+   *pc=c; *pb=b;
+ }
+-#endif
++//#endif
+ 
+ 
+ /*
+--- lib/stringbuf.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/stringbuf.c	2017-10-22 06:17:15.984008666 +0500
+@@ -16,8 +16,11 @@
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+  */
+ 
++#ifndef _GNU_SOURCE
+ #define _GNU_SOURCE
+-#include "sysdep.h"
++#endif
++
++#include <sys/syscall.h>
+ #include <ctype.h>
+ #include <errno.h>
+ #include <string.h>
+--- lib/urlhandling.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/urlhandling.c	2017-10-22 04:17:29.296406184 +0500
+@@ -1,4 +1,4 @@
+-#include "sysdep.h"
++#include <sys/syscall.h>
+ #include <ctype.h>
+ #include <errno.h>
+ #include <string.h>
+--- lib/wildfire.c	2017-04-21 21:39:13.000000000 +0500
++++ lib/wildfire.c	2017-10-22 04:17:42.822405435 +0500
+@@ -1,6 +1,6 @@
+ /*@{*/
+ 
+-#include "sysdep.h"
++#include <sys/syscall.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+--- tests/stringbuf_IO_test.c	2017-04-21 21:39:13.000000000 +0500
++++ tests/stringbuf_IO_test.c	2017-10-23 03:18:08.506824089 +0500
+@@ -32,7 +32,7 @@
+ #include <arpa/inet.h>
+ #include <sys/un.h>
+ #include <netdb.h>
+-#include <sys/poll.h>
++#include <poll.h>
+ #include <string.h>
+ #include <pwd.h>
+ #include <errno.h>
+--- tests/stringbuf_stream.c	2017-04-21 21:39:13.000000000 +0500
++++ tests/stringbuf_stream.c	2017-10-23 03:18:40.377822326 +0500
+@@ -32,7 +32,7 @@
+ #include <arpa/inet.h>
+ #include <sys/un.h>
+ #include <netdb.h>
+-#include <sys/poll.h>
++#include <poll.h>
+ #include <string.h>
+ #include <pwd.h>
+ #include <errno.h>
+--- tests/stripallbut_test.c	2017-04-21 21:39:13.000000000 +0500
++++ tests/stripallbut_test.c	2017-10-22 06:49:25.291901950 +0500
+@@ -22,9 +22,9 @@
+ #ifndef CUNIT_AUTOMATED_H_SEEN
+ #define CUNIT_AUTOMATED_H_SEEN
+ 
+-#include <CUnit/CUnit.h>
+-#include <CUnit/Basic.h>
+-#include <CUnit/TestDB.h>
++#include <BCUnit/BCUnit.h>
++#include <BCUnit/Basic.h>
++#include <BCUnit/TestDB.h>
+ 
+ 
+ CU_EXPORT void         CU_automated_run_tests(void);
+--- tests/stringbuf_test.h	2017-04-21 21:39:13.000000000 +0500
++++ tests/stringbuf_test.h	2017-10-22 06:50:48.785897331 +0500
+@@ -2,9 +2,9 @@
+ #ifndef CUNIT_AUTOMATED_H_SEEN
+ #define CUNIT_AUTOMATED_H_SEEN
+ 
+-#include <CUnit/CUnit.h>
+-#include <CUnit/Basic.h>
+-#include <CUnit/TestDB.h>
++#include <BCUnit/BCUnit.h>
++#include <BCUnit/Basic.h>
++#include <BCUnit/TestDB.h>
+ 
+ 
+ CU_EXPORT void         CU_automated_run_tests(void);

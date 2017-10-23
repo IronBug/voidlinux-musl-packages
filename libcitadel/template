@@ -1,17 +1,17 @@
 # Template file for 'libcitadel'
 pkgname=libcitadel
-version="4.0"
+version=4.0
 revision=904
 build_style=gnu-configure
-short_desc="Implementation of the Sieve mail filtering language."
+short_desc="Common library for Citadel system"
 maintainer="Yana A. Kireyonok <Yana.Kireyonok@linux.com>"
 license="GPLv3"
-homepage="http://sodabrew.github.com/libsieve/"
+homepage="http://www.citadel.org/doku.php"
 
-configure_args=" --with-zlib "
-hostmakedepends=" automake libtool "
-makedepends=" zlib-devel "
-#make_install_args="prefix=/usr"
+configure_args=" --prefix=/usr "
+depends=" zlib libsieve "
+hostmakedepends=" autoconf automake libtool autoconf-archive bcunit "
+makedepends=" zlib-devel bcunit-devel  "
 
 wrksrc=libcitadel
 
@@ -19,10 +19,20 @@ distfiles="http://easyinstall.citadel.org/$pkgname.tar.gz"
 checksum="dae35c88aad1160bc520ae17c87105fab76c59e4ff7dd356e550614d79c7cf88"
 
 pre_configure() {
-	export CFLAGS=${CFLAGS}" -D_GNU_SOURCE -DHAVE_MMAP "
+	export CFLAGS=${CFLAGS}" -D_GNU_SOURCE "
+	autoreconf -fi
 }
 
-
+libcitadel-devel_package() {
+        depends="libcitadel>=${version}_${revision}"
+        short_desc+=" - development files"
+        pkg_install() {
+                vmove usr/include
+                vmove usr/lib/pkgconfig
+                vmove "usr/lib/*.a"
+                vmove "usr/lib/*.so"
+        }
+}
 
 
 
