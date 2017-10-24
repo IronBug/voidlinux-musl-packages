@@ -1,4 +1,4 @@
-diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/addr-lex.l /home/heretic/src/voidlinux/void-packages/masterdir/builddir/libsieve-2.3/src/sv_parser/addr-lex.l
+diff -ruN src/sv_parser/addr-lex.l src/sv_parser/addr-lex.l
 --- src/sv_parser/addr-lex.l	2017-10-21 18:39:05.606325753 +0500
 +++ src/sv_parser/addr-lex.l	2017-10-21 18:28:15.418361717 +0500
 @@ -50,7 +50,9 @@
@@ -11,7 +11,7 @@ diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/addr-lex.l /home/heretic/src/
  
  %x QSTRING DOMAINLIT COMMENT
  
-diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/addr.y /home/heretic/src/voidlinux/void-packages/masterdir/builddir/libsieve-2.3/src/sv_parser/addr.y
+diff -ruN src/sv_parser/addr.y src/sv_parser/addr.y
 --- src/sv_parser/addr.y	2017-10-21 18:39:05.607325753 +0500
 +++ src/sv_parser/addr.y	2017-10-21 18:50:49.475286820 +0500
 @@ -40,7 +40,6 @@
@@ -22,7 +22,7 @@ diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/addr.y /home/heretic/src/void
  #include "addrinc.h"
  #include "addr-lex.h"
  extern YY_DECL;
-diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/header-lex.l /home/heretic/src/voidlinux/void-packages/masterdir/builddir/libsieve-2.3/src/sv_parser/header-lex.l
+diff -ruN src/sv_parser/header-lex.l src/sv_parser/header-lex.l
 --- src/sv_parser/header-lex.l	2017-10-21 18:39:05.609325753 +0500
 +++ src/sv_parser/header-lex.l	2017-10-21 18:12:12.024415005 +0500
 @@ -34,6 +34,7 @@
@@ -33,7 +33,7 @@ diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/header-lex.l /home/heretic/sr
  
  %x S_NAME S_TEXT S_WRAP
  
-diff -ruN /home/heretic/tmp/libsieve/src/sv_parser/sieve-lex.l /home/heretic/src/voidlinux/void-packages/masterdir/builddir/libsieve-2.3/src/sv_parser/sieve-lex.l
+diff -ruN src/sv_parser/sieve-lex.l src/sv_parser/sieve-lex.l
 --- src/sv_parser/sieve-lex.l	2017-10-21 18:39:05.610325753 +0500
 +++ src/sv_parser/sieve-lex.l	2017-10-21 17:55:49.908469329 +0500
 @@ -52,6 +52,7 @@
