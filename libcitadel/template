@@ -16,7 +16,7 @@ makedepends=" zlib-devel bcunit-devel  "
 wrksrc=libcitadel
 
 distfiles="http://easyinstall.citadel.org/$pkgname.tar.gz"
-checksum="dae35c88aad1160bc520ae17c87105fab76c59e4ff7dd356e550614d79c7cf88"
+checksum=dae35c88aad1160bc520ae17c87105fab76c59e4ff7dd356e550614d79c7cf88
 
 pre_configure() {
 	export CFLAGS=${CFLAGS}" -D_GNU_SOURCE "
