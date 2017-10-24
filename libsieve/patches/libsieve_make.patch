@@ -1,0 +1,21 @@
+--- Makefile.am	2017-10-21 18:39:05.598325753 +0500
++++ Makefile.am	2017-10-24 02:36:19.506990283 +0500
+@@ -12,15 +12,16 @@
+ 
+ include_HEADERS		= src/sv_include/sieve2.h src/sv_include/sieve2_error.h
+ 
+-AM_CFLAGS		= -Wall -I$(top_srcdir) -I$(top_srcdir)/src/sv_include -I$(top_builddir) ${CFLAG_VISIBILITY}
++AM_CFLAGS		= -Wall -I$(top_srcdir) -I$(top_srcdir)/src/sv_include -I$(top_builddir) ${CFLAG_VISIBILITY} -fPIC
+ AM_LFLAGS		= -s -olex.yy.c
+ 
+ noinst_PROGRAMS		= src/sv_test/example src/sv_test/testcomp
+ src_sv_test_example_LDADD      	= src/libsieve.la
+ src_sv_test_testcomp_LDADD     	= src/libsieve.la
+ 
++lib_LDFLAGS		= -fPIC
+ lib_LTLIBRARIES         = src/libsieve.la
+-src_libsieve_la_LDFLAGS     = -no-undefined -version-info 1:5
++src_libsieve_la_LDFLAGS     = -no-undefined -version-info 3:2
+ src_libsieve_la_SOURCES      = \
+ 	src/sv_interface/callbacks2.c src/sv_interface/callbacks2.h src/sv_interface/context2.c src/sv_interface/context2.h src/sv_interface/message2.c src/sv_interface/message2.h src/sv_interface/message.c src/sv_interface/message.h src/sv_interface/script2.c src/sv_interface/script.c src/sv_interface/script.h src/sv_interface/tree.c src/sv_interface/tree.h \
+ 	src/sv_parser/addrinc.h src/sv_parser/addr.y src/sv_parser/addr-lex.l src/sv_parser/comparator.c src/sv_parser/comparator.h src/sv_parser/headerinc.h src/sv_parser/header.y src/sv_parser/header-lex.l src/sv_parser/parser.h src/sv_parser/sieveinc.h src/sv_parser/sieve.y src/sv_parser/sieve-lex.l \

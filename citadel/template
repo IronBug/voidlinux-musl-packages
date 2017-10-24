@@ -1,0 +1,28 @@
+# Template file for 'citadel'
+pkgname=citadel
+version="9.2"
+revision=0
+build_style=gnu-configure
+short_desc="Citadel Server"
+maintainer="Yana A. Kireyonok <Yana.Kireyonok@linux.com>"
+license="GPLv3"
+homepage="http://sodabrew.github.com/libsieve/"
+
+makedepends=" libical-devel zlib-devel libsieve libcitadel-devel db-devel expat-devel libcurl-devel libsieve "
+depends="libsieve libcitadel zlib libical db expat libcurl "
+hostmakedepends=" libdb libical expat coreutils "
+#make_install_args="prefix=/usr"
+
+wrksrc=citadel
+
+distfiles="http://easyinstall.citadel.org/citadel.tar.gz"
+checksum="369a13f37023a7a501103784df08dc9212d98e0523515f98fcbe5b14b75315b9"
+
+pre_configure() {
+	export CFLAGS=${CFLAGS}" -D_GNU_SOURCE "
+}
+
+
+
+
+
