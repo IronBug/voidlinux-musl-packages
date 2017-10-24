@@ -1,0 +1,41 @@
+--- webserver.c	2017-04-21 21:39:13.000000000 +0500
++++ webserver.c	2017-10-09 06:44:52.000000000 +0500
+@@ -43,7 +43,7 @@
+ char wizard_filename[PATH_MAX];	/* location of file containing the last webcit version against which we ran setup wizard */
+ int running_as_daemon = 0;	/* should we deamonize on startup? */
+ 
+-/* #define DBG_PRINNT_HOOKS_AT_START */
++#define DBG_PRINNT_HOOKS_AT_START 
+ #ifdef DBG_PRINNT_HOOKS_AT_START
+ extern HashList *HandlerHash;
+ const char foobuf[32];
+@@ -248,8 +248,14 @@
+ 	/* initialize various subsystems */
+ 
+ 	initialise_modules();
++	syslog(LOG_NOTICE, "initialise_modules OK");
++	syslog(LOG_NOTICE, " ");
+ 	initialise2_modules();
++        syslog(LOG_NOTICE, "initialise2_modules OK");
++        syslog(LOG_NOTICE, " ");
+ 	InitTemplateCache();
++        syslog(LOG_NOTICE, "InitTemplateCache OK");
++        syslog(LOG_NOTICE, " ");
+ 	if (DumpTemplateI18NStrings) {
+ 		FILE *fd;
+ 		StrBufAppendBufPlain(I18nDump, HKEY("}\n"), 0);
+@@ -270,9 +276,13 @@
+ 		fclose(fd);
+ 		return 0;
+ 	}
++        syslog(LOG_NOTICE, "DumpTemplateI18NStrings OK");
++        syslog(LOG_NOTICE, " ");
+ 
+ 	/* Tell libical to return an error instead of aborting if it sees badly formed iCalendar data. */
+-	icalerror_errors_are_fatal = 0;
++	icalerror_set_errors_are_fatal(0);
++        syslog(LOG_NOTICE, "icalerror_set_errors_are_fatal OK");
++        syslog(LOG_NOTICE, " ");
+ 
+ 	/* Use our own prefix on tzid's generated from system tzdata */
+ 	icaltimezone_set_tzid_prefix("/citadel.org/");

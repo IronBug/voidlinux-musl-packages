@@ -1,0 +1,23 @@
+--- static/t/vcard/msg_display.html	2017-10-09 07:30:31.000000000 +0500
++++ static/t/vcard/msg_display.html	2017-10-09 07:31:08.000000000 +0500
+@@ -29,7 +29,7 @@
+ <?!("X", 20)>
+ 
+ 
+-<?!("VC:HAVE:TYPE", 30, #"VC:.adr.address")>
++<?!("VC:HAVE:TYPE", 30, #"Address")>
+ <tr>
+  <td><?VC:NAME(#"Address")>:</td>
+  <td>
+--- static/t/user/edit_bio.html	2017-10-09 07:32:15.000000000 +0500
++++ static/t/user/edit_bio.html	2017-10-09 07:32:41.000000000 +0500
+@@ -8,7 +8,8 @@
+ <?_("Edit Room info")>
+ <?=("box_begin_2")>
+ 
+-<?_("Enter your bio below."> <?_("The text is formatted to the reader's browser. A newline is forced by preceding the next line by a blank.")>
++<?_("Enter your bio below.")> <?_("The text is formatted to the reader's browser. A newline is forced by 
++preceding the next line by a blank.")>
+ <form method="post" action="editbio">
+ <input type="hidden" name="nonce" value="<?NONCE()>">
+ <textarea name="msgtext" wrap=soft rows=10 cols=80 width=80><?USER:BIO("", "X")></textarea>

@@ -1,0 +1,24 @@
+# Template file for 'Webcit'
+pkgname=webcit
+version=4.0
+revision=904
+build_style=gnu-configure
+
+short_desc="Implementation of the Sieve mail filtering language."
+maintainer="Yana A. Kireyonok <Yana.Kireyonok@linux.com>"
+license="CMU"
+homepage="http://sodabrew.github.com/libsieve/"
+hostmakedepends=" automake "
+#make_install_args="prefix=/usr"
+makedepends=" zlib-devel libical-devel libcitadel-devel expat-devel "
+depends=" zlib libical libcitadel expat "
+
+wrksrc=webcit
+
+distfiles="http://easyinstall.citadel.org/webcit.tar.gz"
+checksum=18775d8f451d06aeabc3d33cef5d3d4b547242002e7ded0ed8a02689be347cb4
+
+
+
+
+
